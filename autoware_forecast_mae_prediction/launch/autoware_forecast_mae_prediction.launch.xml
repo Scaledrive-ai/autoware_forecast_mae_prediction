@@ -1,0 +1,27 @@
+<launch>
+  <arg name="max_num_agents" default="10"/>
+  <arg name="marker_array_vis_output" default="/perception/object_recognition/forecast_mae_trajectories"/>
+  <arg name="predicted_obj_output" default="/perception/object_recognition/forecast_mae_objects"/>
+  <arg name="lanelet_map_path" default="~/Documents/town_10/backup/lanelet2_map.osm"/>
+  <arg name="model_ckpt_path" default="/media/ahsan/T7/emp_model/forecast-mae/checkpoints/multiagent_baseline.ckpt"/>
+  <arg name="map_load_interval" default="10.0" description="time interval(seconds) to update map"/>
+  <arg name="prediction_frequency" default="10.0" description="how many times prediction callback will be invoked in a second"/>
+  <arg name="agent_reset_time_gap" default="1.5" description="if a tracked agent is missing over x second, its history will reset"/>
+  <arg name="ex_agent_hold_period" default="5.0" description=""/>
+  <arg name="time_history" default="2" description="how many second of agent history given to start prediction"/>
+
+  <node pkg="autoware_forecast_mae_prediction" exec="autoware_forecast_mae" name="autoware_forecast_mae_node" output="screen">
+    <param name="max_num_agents" value="$(var max_num_agents)"/>
+    <param name="marker_array_vis_output" value="$(var marker_array_vis_output)"/>
+    <param name="predicted_obj_output" value="$(var predicted_obj_output)"/>
+    <param name="lanelet_map_path" value="$(var lanelet_map_path)"/>
+    <param name="model_ckpt_path" value="$(var model_ckpt_path)"/>
+    <param name="map_load_interval" value="$(var map_load_interval)"/>
+    <param name="prediction_frequency" value="$(var prediction_frequency)"/>
+    <param name="agent_reset_time_gap" value="$(var agent_reset_time_gap)"/>
+    <param name="ex_agent_hold_period" value="$(var ex_agent_hold_period)"/>
+    <param name="time_history" value="$(var time_history)"/>
+
+  </node>
+</launch>
+
